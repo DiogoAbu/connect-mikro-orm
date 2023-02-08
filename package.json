@@ -1,31 +1,37 @@
 {
-  "name": "connect-typeorm",
-  "description": "A TypeORM-based session store",
-  "version": "2.0.0",
-  "main": "out",
-  "typings": "out",
+  "name": "connect-mikro-orm",
+  "description": "A MikroORM-based session store",
+  "version": "0.0.1",
+  "main": "./dist",
+  "typings": "./dist",
+  "files": [
+    "./dist"
+  ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/freshgiammi-lab/connect-typeorm.git"
+    "url": "git+https://github.com/DiogoAbu/connect-mikro-orm.git"
   },
   "author": "makepost",
   "contributors": [
     "freshgiammi <rengucci.gianmarco@gmail.com>",
-    "Nathan Phillip Brink <ohnobinki@ohnopublishing.net>"
+    "Nathan Phillip Brink <ohnobinki@ohnopublishing.net>",
+    "Diogo Silva <diogodeazevedosilva@gmail.com>"
   ],
   "license": "MIT",
   "scripts": {
+    "build": "rm -rf dist && yarn tsc -p tsconfig.build.json",
     "prepare": "husky install",
-    "lint": "eslint 'src/**/*.ts'",
-    "lint:fix": "eslint --fix 'src/**/*.ts'",
-    "lint:strict": "eslint --max-warnings=0 'src/**/*.ts'",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint --fix src/**/*.ts",
+    "lint:strict": "eslint --max-warnings=0 src/**/*.ts",
     "prettify": "prettier -w .",
     "prettify:check": "prettier -c .",
     "pre-commit": "lint-staged",
     "commit": "commit",
-    "format": "tsc && npm run lint:fix && ava",
-    "test": "tsc && nyc ava && nyc report --reporter=html && npm run lint",
-    "test:extended": "tsc && tav typeorm '^0.3.0' ava && npm i && npm test"
+    "format": "tsc && yarn lint:fix && ava",
+    "test": "tsc && nyc ava && nyc report --reporter=html && yarn lint",
+    "test:extended": "tsc && tav mikro-orm '^0.3.0' ava && yarn i && yarn test",
+    "prepack": "yarn tsc -p tsconfig.build.json"
   },
   "dependencies": {
     "@types/debug": "4.1.7",
@@ -37,10 +43,15 @@
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@commitlint/prompt-cli": "^17.0.3",
+    "@mikro-orm/core": "^5.6.8",
+    "@mikro-orm/knex": "^5.6.8",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^9.0.2",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "5.30.7",
     "@typescript-eslint/parser": "5.30.7",
     "ava": "^4.3.1",
+    "conventional-changelog-conventionalcommits": "^5.0.0",
     "eslint": "8.20.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-import": "2.26.0",
@@ -53,21 +64,19 @@
     "nullthrows": "^1.1.1",
     "nyc": "^15.1.0",
     "prettier": "2.7.1",
+    "semantic-release": "^20.1.0",
     "sqlite3": "^5.0.10",
     "supertest": "^6.2.4",
     "test-all-versions": "^5.0.1",
-    "typeorm": "^0.3.0",
     "typescript": "^4.7.4"
   },
-  "peerDependencies": {
-    "typeorm": "^0.3.7"
-  },
+  "peerDependencies": {},
   "bugs": {
-    "url": "https://github.com/freshgiammi-lab/connect-typeorm/issues"
+    "url": "https://github.com/DiogoAbu/connect-mikro-orm/issues"
   },
-  "homepage": "https://github.com/freshgiammi-lab/connect-typeorm#readme",
+  "homepage": "https://github.com/DiogoAbu/connect-mikro-orm",
   "keywords": [
-    "typeorm",
+    "mikro-orm",
     "postgres",
     "session"
   ]

@@ -2,7 +2,7 @@ name: Poor Man's Code Review
 on:
   push:
     branches:
-      - master
+      - main
       - dev
   pull_request: {}
 
@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: 📥 NPM install (w/ cache)
         uses: bahmutov/npm-install@v1
@@ -49,7 +49,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: 📥 NPM install (w/ cache)
         uses: bahmutov/npm-install@v1
@@ -74,7 +74,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: 📥 NPM install (w/ cache)
         uses: bahmutov/npm-install@v1

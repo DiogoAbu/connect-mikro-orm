@@ -1,4 +1,4 @@
-import { Ttl, TypeormStore } from './app/TypeormStore/TypeormStore';
+import { Ttl, MikroOrmStore } from './app/MikroOrmStore/MikroOrmStore';
 import { ISession } from './domain/Session/ISession';
 
-export { ISession, Ttl, TypeormStore };
+export { ISession, Ttl, MikroOrmStore };

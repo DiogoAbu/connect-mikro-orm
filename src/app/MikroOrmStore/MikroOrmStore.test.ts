@@ -5,7 +5,7 @@ import nullthrows from 'nullthrows';
 import * as Supertest from 'supertest';
 import { Column, DataSource, DeleteDateColumn, Entity, Index, PrimaryColumn, Repository } from 'typeorm';
 import { ISession } from '../../domain/Session/ISession';
-import { TypeormStore } from './TypeormStore';
+import { MikroOrmStore } from './MikroOrmStore';
 
 test.beforeEach(async (t) => {
   const ctx = new Test();
@@ -231,7 +231,7 @@ class Test {
         resave: false,
         saveUninitialized: false,
         secret: Math.random().toString(),
-        store: new TypeormStore({
+        store: new MikroOrmStore({
           cleanupLimit: 1,
           limitSubquery: false,
           ttl: this.ttl,

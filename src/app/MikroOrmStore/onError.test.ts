@@ -5,7 +5,7 @@ import nullthrows from 'nullthrows';
 import * as Supertest from 'supertest';
 import { Column, DataSource, DeleteDateColumn, Entity, Index, PrimaryColumn, Repository } from 'typeorm';
 import { ISession } from '../../domain/Session/ISession';
-import { TypeormStore } from './TypeormStore';
+import { MikroOrmStore } from './MikroOrmStore';
 
 @Entity()
 class Session implements ISession {
@@ -59,7 +59,7 @@ test('increments as expected when no error happens', async (t) => {
       resave: false,
       saveUninitialized: false,
       secret: Math.random().toString(),
-      store: new TypeormStore({ limitSubquery: false }).connect(ctx.repository),
+      store: new MikroOrmStore({ limitSubquery: false }).connect(ctx.repository),
     })
   );
   ctx.route();
@@ -80,7 +80,7 @@ test('disconnects on error to prevent more damage', async (t) => {
       resave: false,
       saveUninitialized: false,
       secret: Math.random().toString(),
-      store: new TypeormStore({ limitSubquery: false }).connect(ctx.repository),
+      store: new MikroOrmStore({ limitSubquery: false }).connect(ctx.repository),
     })
   );
   ctx.route();
@@ -109,7 +109,7 @@ test('but allows you to override this', async (t) => {
       resave: false,
       saveUninitialized: false,
       secret: Math.random().toString(),
-      store: new TypeormStore({
+      store: new MikroOrmStore({
         limitSubquery: false,
         onError: (_, e) => (error = e),
       }).connect(ctx.repository),
@@ -144,7 +144,7 @@ test('with the same behavior, if you wish', async (t) => {
       resave: false,
       saveUninitialized: false,
       secret: Math.random().toString(),
-      store: new TypeormStore({
+      store: new MikroOrmStore({
         limitSubquery: false,
         onError: (store, e) => {
           error = e;
