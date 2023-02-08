@@ -2,10 +2,11 @@
   "name": "connect-mikro-orm",
   "description": "A MikroORM-based session store",
   "version": "1.0.0",
-  "main": "./dist",
-  "typings": "./dist",
+  "main": "dist/index.js",
+  "typings": "dist",
   "files": [
-    "./dist"
+    "dist",
+    "scripts/run-postinstall.js"
   ],
   "repository": {
     "type": "git",
@@ -20,7 +21,6 @@
   "license": "MIT",
   "scripts": {
     "build": "rm -rf dist && yarn tsc -p tsconfig.build.json",
-    "prepare": "husky install",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint --fix src/**/*.ts",
     "lint:strict": "eslint --max-warnings=0 src/**/*.ts",
@@ -31,7 +31,9 @@
     "format": "tsc && yarn lint:fix && ava",
     "test": "tsc && nyc ava && nyc report --reporter=html && yarn lint",
     "test:extended": "tsc && tav mikro-orm '^0.3.0' ava && yarn i && yarn test",
-    "prepack": "yarn tsc -p tsconfig.build.json"
+    "prepare": "husky install",
+    "postinstall": "node scripts/run-postinstall.js",
+    "prepack": "yarn build"
   },
   "dependencies": {
     "@types/debug": "4.1.7",
@@ -63,6 +65,8 @@
     "lint-staged": "13.0.3",
     "nullthrows": "^1.1.1",
     "nyc": "^15.1.0",
+    "patch-package": "^6.5.1",
+    "postinstall-postinstall": "^2.1.0",
     "prettier": "2.7.1",
     "semantic-release": "^20.1.0",
     "sqlite3": "^5.0.10",

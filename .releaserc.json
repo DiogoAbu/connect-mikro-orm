@@ -23,7 +23,7 @@
       "@semantic-release/github",
       {
         "githubUrl": "https://api.github.com",
-        "assets": "dist/*.tgz"
+        "assets": "*.tgz"
       }
     ],
     [
