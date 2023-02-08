@@ -2,8 +2,14 @@
   <h1>🔗 connect-mikro-orm</h1>
   <h3>A MikroORM-based session store.<h3><br/>
 
-[![CodeFactor](https://www.codefactor.io/repository/github/DiogoAbu/connect-mikro-orm/badge)](https://www.codefactor.io/repository/github/DiogoAbu/connect-mikro-orm)
-[![GitHub Repo stars](https://img.shields.io/github/stars/DiogoAbu/connect-mikro-orm)](https://github.com/DiogoAbu/connect-mikro-orm/stargazers)
+<p align="center">
+  <a href="https://www.npmjs.com/package/connect-mikro-orm">
+    <img alt="npm" src="https://img.shields.io/npm/v/connect-mikro-orm?style=flat-square">
+  </a>
+  <a href="https://github.com/DiogoAbu/connect-mikro-orm">
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/DiogoAbu/connect-mikro-orm?style=flat-square">
+  </a>
+</p>
 
 </div>
 
