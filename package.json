@@ -1,7 +1,7 @@
 {
   "name": "connect-mikro-orm",
   "description": "A MikroORM-based session store",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "typings": "dist",
   "files": [
