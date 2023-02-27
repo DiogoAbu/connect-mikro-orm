@@ -26,6 +26,7 @@ export class MikroOrmStore extends Store {
   private onError: ((s: MikroOrmStore, e: Error) => void) | undefined;
   private repository!: SqlEntityRepository<ISession>;
   private ttl: Ttl | undefined;
+  private asJSON: boolean | undefined;
 
   /**
    * Initializes MikroOrmStore with the given `options`.
@@ -35,12 +36,14 @@ export class MikroOrmStore extends Store {
       SessionOptions & {
         onError: (s: MikroOrmStore, e: Error) => void;
         ttl: Ttl;
+        asJSON?: boolean;
       }
     > = {}
   ) {
     super();
     this.onError = options.onError;
     this.ttl = options.ttl;
+    this.asJSON = options.asJSON;
   }
 
   public connect(repository: SqlEntityRepository<ISession>) {
@@ -77,15 +80,19 @@ export class MikroOrmStore extends Store {
    * Commits the given `sess` object associated with the given `sid`.
    */
   public set = (sid: string, sess: SessionData, fn?: (error?: Error) => void) => {
-    let json: string;
+    let json: string | SessionData;
 
-    try {
-      json = JSON.stringify(sess);
-    } catch (er: unknown) {
-      if (er instanceof Error) {
-        return fn ? fn(er) : undefined;
-      } else {
-        return fn ? fn(new Error('serialize error')) : undefined;
+    if (this.asJSON) {
+      json = sess;
+    } else {
+      try {
+        json = JSON.stringify(sess);
+      } catch (er: unknown) {
+        if (er instanceof Error) {
+          return fn ? fn(er) : undefined;
+        } else {
+          return fn ? fn(new Error('serialize error')) : undefined;
+        }
       }
     }
 
