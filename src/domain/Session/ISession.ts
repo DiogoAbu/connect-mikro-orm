@@ -1,5 +1,5 @@
 export interface ISession {
   id: string;
-  json: string;
+  json: string | Record<string, unknown>;
   expiredAt: number;
 }

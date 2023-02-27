@@ -12,6 +12,7 @@ import * as Debug from 'debug';
 import { SessionData, SessionOptions, Store } from 'express-session';
 import { ISession } from '../../domain/Session/ISession';
 import { SqlEntityRepository } from '@mikro-orm/knex';
+import { parseJson } from '../../utils/parse-json';
 
 /**
  * One day in seconds.
@@ -62,7 +63,7 @@ export class MikroOrmStore extends Store {
         }
 
         this.debug('GOT %s', session.json);
-        const result: SessionData = JSON.parse(session.json);
+        const result = parseJson<SessionData>(session.json);
 
         fn(undefined, result);
       })
@@ -182,7 +183,7 @@ export class MikroOrmStore extends Store {
       .findAll()
       .then((sessions) => {
         result = sessions.map((session) => {
-          const sess: SessionData = JSON.parse(session.json);
+          const sess = parseJson<SessionData>(session.json);
           sess.id = session.id;
           return sess;
         });
